@@ -1,40 +1,42 @@
 'use strict'
-const sequence = [2, 5, 6, 1, 8, 3, 10, 4];
 
-const set = new Set();
+function longestSequence(sequence) {
 
-sequence.forEach((num) => (set.add(num)));
+ const set = new Set();
 
-console.log(set);
+ sequence.forEach((num) => (set.add(num)));
 
-let i = 0;
-let length = 0;
-let maxLength = 0;
-let setIttr = set.values();
+ let length = 0;
+ let maxLength = 0;
+ let setIttr = set.values();
+ let { value: start, done: done } = setIttr.next();
 
-while (i < sequence.length) {
- 
-  let start = setIttr.next().value;
-  let tmep = start-1;
-  while (set.has(++tmep)) {
-  set.delete(tmep);
-  length++;  
-  i++;
- }
+ while (!done) {
+  
+  let temp = start - 1;
+  while (set.has(++temp)) {
+   set.delete(temp);
+   length++;
+  }
 
- tmep = start;
+  temp = start;
 
- while(set.has(--tmep)){
-  set.delete(tmep);
-  length++;  
-  i++;
- }
+  while (set.has(--temp)) {
+   set.delete(temp);
+   length++;
+  }
 
- if(length > maxLength){
-  maxLength = length;
+  maxLength = Math.max(maxLength, length);
+
   length = 0;
+
+  ({ value: start, done: done } = setIttr.next());
+
  }
+
+ return maxLength;
 
 }
 
-console.log(maxLength);
+
+module.exports = longestSequence;
