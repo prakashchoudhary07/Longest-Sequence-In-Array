@@ -21,7 +21,7 @@ while (i < sequence.length) {
   length++;  
   i++;
  }
-  
+
  tmep = start;
 
  while(set.has(--tmep)){
@@ -29,8 +29,10 @@ while (i < sequence.length) {
   length++;  
   i++;
  }
+
  if(length > maxLength){
   maxLength = length;
+  length = 0;
  }
 
 }
