@@ -15,7 +15,7 @@ let setIttr = set.values();
 while (i < sequence.length) {
  
   let start = setIttr.next().value;
-  let tmep = start;
+  let tmep = start-1;
   while (set.has(++tmep)) {
   set.delete(tmep);
   length++;  
